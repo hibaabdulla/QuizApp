@@ -8,9 +8,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var trueButton: UIButton!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var falseButton: UIButton!
-    let quiz = [Question(text: "Eight -  Two = Six", answer: "True"),
-                Question(text: "Three x Three = Nine", answer: "True"),
-                Question(text: "Five + One = Four", answer: "False")]
+    let quiz = [Question(q: "Eight -  Two = Six", a: "True"),
+                Question(q: "Three x Three = Nine", a: "True"),
+                Question(q: "Five + One = Four", a: "False")]
     
     var questionNumber = 0
     
