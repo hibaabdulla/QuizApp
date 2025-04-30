@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         questionLabel.text = quiz[questionNumber].text
+        progressBar.progress = Float(questionNumber+1)/Float(quiz.count)
     }
     
     @IBAction func answerButtonPressed(_ sender: UIButton) {
@@ -40,6 +41,7 @@ class ViewController: UIViewController {
         }
 
         Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(changeQuestion), userInfo: nil, repeats: false)
+        
     }
     
     @objc func changeQuestion() {
@@ -48,12 +50,14 @@ class ViewController: UIViewController {
             questionLabel.text = quiz[questionNumber].text
             trueButton.backgroundColor = .clear
             falseButton.backgroundColor = .clear
+            progressBar.progress = Float(questionNumber+1)/Float(quiz.count)
         }
         else {
             questionNumber = 0
             questionLabel.text = quiz[questionNumber].text
             trueButton.backgroundColor = .clear
             falseButton.backgroundColor = .clear
+            progressBar.progress = Float(questionNumber+1)/Float(quiz.count)
         }
     }
 }
