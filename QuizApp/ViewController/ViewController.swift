@@ -8,6 +8,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var trueButton: UIButton!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var falseButton: UIButton!
+    @IBOutlet weak var scoreLabel: UILabel!
     
     var quizBrain = QuizBrain()
         
@@ -24,6 +25,7 @@ class ViewController: UIViewController {
         if quizBrain.checkAnswer(answerPressed) == true
             {
             sender.backgroundColor = UIColor.green
+            scoreLabel.text = "Score = \(quizBrain.score)"
         }
         else {
             sender.backgroundColor = UIColor.red
@@ -41,6 +43,7 @@ class ViewController: UIViewController {
             trueButton.backgroundColor = .clear
             falseButton.backgroundColor = .clear
             progressBar.progress = quizBrain.getProgress()
+            scoreLabel.text = "Score = \(quizBrain.score)"
         
     }
 }
