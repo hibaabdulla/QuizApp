@@ -5,10 +5,11 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var trueButton: UIButton!
     @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var falseButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var optionOneButton: UIButton!
+    @IBOutlet weak var optionTwoButton: UIButton!
+    @IBOutlet weak var optionThreeButton: UIButton!
     
     var quizBrain = QuizBrain()
         
@@ -16,13 +17,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         questionLabel.text = quizBrain.quiz[quizBrain.questionNumber].text
         progressBar.progress = Float(quizBrain.questionNumber+1)/Float(quizBrain.quiz.count)
+        optionOneButton.setTitle(quizBrain.quiz[quizBrain.questionNumber].answer[0], for: .normal)
+        optionTwoButton.setTitle(quizBrain.quiz[quizBrain.questionNumber].answer[1], for: .normal)
+        optionThreeButton.setTitle(quizBrain.quiz[quizBrain.questionNumber].answer[2], for: .normal)
     }
     
     @IBAction func answerButtonPressed(_ sender: UIButton) {
+
+        let answerPressed = sender.titleLabel?.text
         
-        let answerPressed = sender.currentTitle!
-        
-        if quizBrain.checkAnswer(answerPressed) == true
+        if quizBrain.checkAnswer(answerPressed!) == true
             {
             sender.backgroundColor = UIColor.green
             scoreLabel.text = "Score = \(quizBrain.score)"
@@ -30,7 +34,6 @@ class ViewController: UIViewController {
         else {
             sender.backgroundColor = UIColor.red
         }
-
         quizBrain.changeQuestion()
         
         Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(changeUi), userInfo: nil, repeats: false)
@@ -38,12 +41,15 @@ class ViewController: UIViewController {
     }
     
     @objc func changeUi() {
-        
-            questionLabel.text = quizBrain.getQuestion()
-            trueButton.backgroundColor = .clear
-            falseButton.backgroundColor = .clear
-            progressBar.progress = quizBrain.getProgress()
-            scoreLabel.text = "Score = \(quizBrain.score)"
+        questionLabel.text = quizBrain.getQuestion()
+        optionOneButton.backgroundColor = .clear
+        optionTwoButton.backgroundColor = .clear
+        optionThreeButton.backgroundColor = .clear
+        progressBar.progress = quizBrain.getProgress()
+        scoreLabel.text = "Score = \(quizBrain.score)"
+        optionOneButton.setTitle(quizBrain.quiz[quizBrain.questionNumber].answer[0], for: .normal)
+        optionTwoButton.setTitle(quizBrain.quiz[quizBrain.questionNumber].answer[1], for: .normal)
+        optionThreeButton.setTitle(quizBrain.quiz[quizBrain.questionNumber].answer[2], for: .normal)
         
     }
 }
